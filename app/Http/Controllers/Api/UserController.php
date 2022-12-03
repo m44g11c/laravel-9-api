@@ -58,7 +58,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $employee = User::with('records')->find($user->id);
+
+        return new UserResource($employee);
     }
 
     /**
@@ -72,7 +74,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
-        return new RecordResource($user);
+        return new UserResource($user);
     }
 
     /**
